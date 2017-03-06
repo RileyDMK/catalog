@@ -1,17 +1,46 @@
 <html>
   <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   </head>
   <body>
-    <h1>Restaurants</h1>
-    <a href='{{url_for('newRestaurant')}}'>New</a></br></br></br>
-
-    {% for r in restaurants %}
-      <a href='{{url_for('showMenu', restaurant_id=r.id)}}'>{{r.name}}</a>
-    </br>
-      <a href='{{url_for('editRestaurant', restaurant_id=r.id)}}'>Edit</a>
-      <a href='{{url_for('deleteRestaurant', restaurant_id=r.id)}}'>Delete</a>
-    </br></br>
-    {% endfor %}
-
+    <div class='container'>
+      <div class='row'>
+        <div class'col-md-12'>
+          <h1 class='text-center'>Restaurants</h1>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-12'>
+          {%with messages = get_flashed_messages()%}
+            {%if messages%}
+            <ul>
+              {%for message in messages%}
+              <li>
+                <strong>{{message}}</strong>
+              </li>
+              {%endfor%}
+            </ul>
+            {%endif%}
+          {%endwith%}
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-12'>
+          <a href='{{url_for('newRestaurant')}}'><p class='text-center'>New</p></a>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-12'>
+          {% for r in restaurants %}
+            <a href='{{url_for('showMenu', restaurant_id=r.id)}}'><p class='text-center'>{{r.name}}</p></a>
+            <p class='text-center'>
+              <a href='{{url_for('editRestaurant', restaurant_id=r.id)}}'>Edit</a>
+              <a href='{{url_for('deleteRestaurant', restaurant_id=r.id)}}'>Delete</a>
+            </p>
+          </br></br>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
   </body>
 </html>
